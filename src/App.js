@@ -1,23 +1,22 @@
 import React from "react";
-import { CircularProgress, Button } from "@material-ui/core";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
-const timerSize = 500;
+import ErrorBoundary from "components/ErrorBoundary";
+
+import Timer from "components/Timer";
+import Header from "components/Header";
+import ButtonSet from "components/ButtonSet";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     height: "100%",
-  },
-  progressWrapper: {
-    margin: "0 auto",
-    width: timerSize,
-    height: timerSize,
-    borderRadius: timerSize,
-    boxShadow: "20px 20px 60px #c4c4c4, -20px -20px 60px #ffffff",
-    padding: 10,
+    backgroundColor: "#e6e6e6",
+    display: "flex",
+    flexDirection: "column",
   },
 }));
+
 
 function App() {
   const classes = useStyles();
@@ -25,18 +24,35 @@ function App() {
   const [total, setTotal] = React.useState(60);
   const [isPlaying, setIsPlaying] = React.useState(false);
 
-  const handleProgress = (progress) => {
-    setProgress(progress);
-  };
-
   const tick = () => {
     if (progress >= total * 60) return;
     setProgress(progress + 1);
-    console.log("progress: " + progress);
+    console.log(`progress: ${progress}`);
   };
 
-  const handleTogglePlaying = () => {
-    setIsPlaying(!isPlaying);
+  const handleTogglePlaying = (v) => {
+    if (v == null) {
+      setIsPlaying(!isPlaying);
+      return;
+    } else {
+      setIsPlaying(v);
+      return;
+    }
+  };
+
+  const handleTotal = (total) => {
+    setTotal(total);
+  };
+
+  const resetProgress = () => {
+    setIsPlaying(false);
+    setProgress(0);
+  };
+
+  const changeTotal = (total) => {
+    handleTogglePlaying(false);
+    resetProgress();
+    handleTotal(total);
   };
 
   React.useEffect(() => {
@@ -52,18 +68,13 @@ function App() {
   });
 
   return (
-    <div className={classes.root}>
-      <div className={classes.progressWrapper}>
-        <CircularProgress
-          size={timerSize}
-          thickness={22}
-          value={100 * (1 - progress/(60 * total))}
-          variant="static"
-        />
+    <ErrorBoundary>
+      <div className={classes.root}>
+        <Header total={total} />
+        <Timer total={total} progress={progress} isPlaying={isPlaying} />
+        <ButtonSet changeTotal={changeTotal} handleTogglePlaying={handleTogglePlaying} isPlaying={isPlaying}/>
       </div>
-      <Button onClick={handleTogglePlaying}>Tick</Button>
-      <div>{progress}</div>
-    </div>
+    </ErrorBoundary>
   );
 }
 
