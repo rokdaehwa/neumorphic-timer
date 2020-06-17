@@ -8,6 +8,7 @@ function ButtonSet(props) {
     return (
         <div className="buttonSet-root">
             <Button onClick={() => handleTogglePlaying(null)}>{(isPlaying) ? "Pause" : "Play"}</Button>
+            <Button onClick={() => changeTotal(1/6)}>1 Min</Button>
             <Button onClick={() => changeTotal(10)}>10 Min</Button>
             <Button onClick={() => changeTotal(20)}>20 Min</Button>
             <Button onClick={() => changeTotal(30)}>30 Min</Button>

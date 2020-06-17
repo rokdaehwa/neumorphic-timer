@@ -17,16 +17,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 function App() {
   const classes = useStyles();
-  const [progress, setProgress] = React.useState(0);
+  const [progress, setProgress] = React.useState(60 * 60);
   const [total, setTotal] = React.useState(60);
   const [isPlaying, setIsPlaying] = React.useState(false);
 
   const tick = () => {
-    if (progress >= total * 60) return;
-    setProgress(progress + 1);
+    if (progress <= 0) {
+      alert('Time Done!');
+      changeTotal(total);
+      return;
+    }
+    setProgress(progress - 1);
     console.log(`progress: ${progress}`);
   };
 
@@ -40,23 +43,13 @@ function App() {
     }
   };
 
-  const handleTotal = (total) => {
-    setTotal(total);
-  };
-
-  const resetProgress = () => {
-    setIsPlaying(false);
-    setProgress(0);
-  };
-
   const changeTotal = (total) => {
     handleTogglePlaying(false);
-    resetProgress();
-    handleTotal(total);
+    setTotal(total);
+    setProgress(60 * total);
   };
 
   React.useEffect(() => {
-    console.log("useEffect");
     const interval = setInterval(() => {
       if (isPlaying) {
         tick();
@@ -70,9 +63,13 @@ function App() {
   return (
     <ErrorBoundary>
       <div className={classes.root}>
-        <Header total={total} />
-        <Timer total={total} progress={progress} isPlaying={isPlaying} />
-        <ButtonSet changeTotal={changeTotal} handleTogglePlaying={handleTogglePlaying} isPlaying={isPlaying}/>
+        <Header total={total} progress={progress} />
+        <Timer progress={progress} isPlaying={isPlaying} />
+        <ButtonSet
+          changeTotal={changeTotal}
+          handleTogglePlaying={handleTogglePlaying}
+          isPlaying={isPlaying}
+        />
       </div>
     </ErrorBoundary>
   );

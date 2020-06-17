@@ -6,7 +6,7 @@ const timerSize = "30rem";
 const timerThickness = 22;
 
 function Timer(props) {
-  const { progress, total, isPlaying } = props;
+  const { progress, isPlaying } = props;
 
   return (
     <div className="timer-root">
@@ -15,7 +15,7 @@ function Timer(props) {
           size={timerSize}
           thickness={timerThickness}
           color={(isPlaying) ? "primary" : "secondary" }
-          value={100 * (1 - progress / (60 * total))}
+          value={progress / 36}
           variant="static"
         />
       </div>
