@@ -25,7 +25,7 @@ function ButtonSet(props) {
           marginLeft: "1rem",
         }}
       >
-        Last Deployed: 2020-06-17
+        Last Deployed: 2020-06-19
       </div>
     </div>
   );
