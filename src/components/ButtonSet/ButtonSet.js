@@ -10,14 +10,21 @@ function ButtonSet(props) {
       <Button onClick={() => handleTogglePlaying(null)}>
         {isPlaying ? "Pause" : "Play"}
       </Button>
-      <Button onClick={() => changeTotal(1 / 6)}>1 Min</Button>
+      <Button onClick={() => changeTotal(1 / 20)}>3 sec</Button>
       <Button onClick={() => changeTotal(10)}>10 Min</Button>
       <Button onClick={() => changeTotal(20)}>20 Min</Button>
       <Button onClick={() => changeTotal(30)}>30 Min</Button>
       <Button onClick={() => changeTotal(40)}>40 Min</Button>
       <Button onClick={() => changeTotal(50)}>50 Min</Button>
       <Button onClick={() => changeTotal(60)}>60 Min</Button>
-      <div style={{ color: "#fff", fontSize: "0.7rem", fontWeight: 100, marginLeft: "1rem" }}>
+      <div
+        style={{
+          color: "#fff",
+          fontSize: "0.7rem",
+          fontWeight: 100,
+          marginLeft: "1rem",
+        }}
+      >
         Last Deployed: 2020-06-17
       </div>
     </div>

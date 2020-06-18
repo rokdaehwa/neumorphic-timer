@@ -6,6 +6,7 @@ import ErrorBoundary from "components/ErrorBoundary";
 import Timer from "components/Timer";
 import Header from "components/Header";
 import ButtonSet from "components/ButtonSet";
+import NoSleep from "nosleep.js";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,6 +18,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+let noSleep = new NoSleep();
+
 function App() {
   const classes = useStyles();
   const [progress, setProgress] = React.useState(60 * 60);
@@ -25,7 +28,7 @@ function App() {
 
   const tick = () => {
     if (progress <= 0) {
-      alert('Time Done!');
+      alert("Time Done!");
       changeTotal(total);
       return;
     }
@@ -36,8 +39,10 @@ function App() {
   const handleTogglePlaying = (v) => {
     if (v == null) {
       setIsPlaying(!isPlaying);
+      noSleep.enable();
       return;
     } else {
+      noSleep.disable();
       setIsPlaying(v);
       return;
     }
@@ -59,7 +64,7 @@ function App() {
     }, 1000);
     return () => clearInterval(interval);
   });
-
+  
   return (
     <ErrorBoundary>
       <div className={classes.root}>
