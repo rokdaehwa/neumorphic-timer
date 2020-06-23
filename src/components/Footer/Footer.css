@@ -1,0 +1,9 @@
+.footer-root {
+    display: flex;
+    align-items: center;
+    padding: .5rem;
+}
+
+.blank {
+    flex: 1;
+}

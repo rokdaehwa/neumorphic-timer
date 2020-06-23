@@ -2,7 +2,7 @@ import React from "react";
 import { CircularProgress } from "@material-ui/core";
 import "./Timer.css";
 
-const timerSize = "30rem";
+const timerSize = "28rem";
 const timerThickness = 22;
 
 function Timer(props) {
@@ -10,14 +10,78 @@ function Timer(props) {
 
   return (
     <div className="timer-root">
-      <div className="timer-wrapper">
-        <CircularProgress
-          size={timerSize}
-          thickness={timerThickness}
-          color={(isPlaying) ? "primary" : "secondary" }
-          value={progress / 36}
-          variant="static"
-        />
+      {/* <ul className="marks">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li className="hours"></li>
+        <li className="hours"></li>
+        <li className="hours"></li>
+        <li className="hours"></li>
+        <li className="hours"></li>
+        <li className="hours"></li>
+        <li className="hours"></li>
+        <li className="hours"></li>
+        <li className="hours"></li>
+        <li className="hours"></li>
+        <li className="hours"></li>
+        <li className="hours"></li>
+      </ul> */}
+      <div className="timer-wrapper-out">
+        <div className="timer-wrapper-in">
+          <CircularProgress
+            size={timerSize}
+            thickness={timerThickness}
+            color={isPlaying ? "primary" : "secondary"}
+            value={progress / 36}
+            variant="static"
+          />
+        </div>
       </div>
     </div>
   );

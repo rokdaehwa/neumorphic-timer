@@ -1,12 +1,15 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import NoSleep from "nosleep.js";
 
 import ErrorBoundary from "components/ErrorBoundary";
+import Collapse from "@material-ui/core/Collapse";
 
 import Timer from "components/Timer";
 import Header from "components/Header";
 import ButtonSet from "components/ButtonSet";
-import NoSleep from "nosleep.js";
+import Watch from "components/Watch";
+import Footer from "components/Footer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,6 +27,7 @@ function App() {
   const classes = useStyles();
   const [progress, setProgress] = React.useState(60 * 60);
   const [total, setTotal] = React.useState(60);
+  const [show, setShow] = React.useState(true);
   const [isPlaying, setIsPlaying] = React.useState(false);
 
   const tick = () => {
@@ -39,10 +43,10 @@ function App() {
   const handleTogglePlaying = (v) => {
     if (v == null) {
       setIsPlaying(!isPlaying);
-      noSleep.enable();
+      // noSleep.enable();
       return;
     } else {
-      noSleep.disable();
+      // noSleep.disable();
       setIsPlaying(v);
       return;
     }
@@ -52,6 +56,10 @@ function App() {
     handleTogglePlaying(false);
     setTotal(total);
     setProgress(60 * total);
+  };
+
+  const handleShow = () => {
+    setShow(!show);
   };
 
   React.useEffect(() => {
@@ -64,16 +72,28 @@ function App() {
     }, 1000);
     return () => clearInterval(interval);
   });
-  
+
   return (
     <ErrorBoundary>
       <div className={classes.root}>
-        <Header total={total} progress={progress} />
+        <Collapse in={show}>
+          <Header total={total} progress={progress} />
+        </Collapse>
         <Timer progress={progress} isPlaying={isPlaying} />
-        <ButtonSet
-          changeTotal={changeTotal}
+        {/* <Watch /> */}
+        <Collapse in={show}>
+          <ButtonSet
+            changeTotal={changeTotal}
+            handleTogglePlaying={handleTogglePlaying}
+            isPlaying={isPlaying}
+          />
+        </Collapse>
+        <Footer
+          show={show}
+          handleShow={handleShow}
           handleTogglePlaying={handleTogglePlaying}
           isPlaying={isPlaying}
+          progress={progress}
         />
       </div>
     </ErrorBoundary>
