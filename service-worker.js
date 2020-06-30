@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/neumorphic-timer/precache-manifest.9258f0bb2650460dab9f50ae9697e14e.js"
+  "/neumorphic-timer/precache-manifest.bbcb24eb72e7e258bf76d89ef94414d0.js"
 );
 
 self.addEventListener('message', (event) => {
